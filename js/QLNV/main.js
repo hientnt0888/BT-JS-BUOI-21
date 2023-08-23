@@ -17,19 +17,23 @@ function themNhanVien() {
 
     var check = true;
     //Check tai khoan
-    check &= validation.checkEmpty(tk, 'Ghi tài khoản dô bạn !', 'tbTKNV')
+    check &= validation.checkEmpty(tk, 'Hãy nhập tài khoản !', 'tbTKNV')
         && validation.checkTK(tk, "Tài khoản không được trùng", "tbTKNV", dsnv.mangNV) && validation.checkNumber(tk, "Tài khoản phải là số từ 4 đến 6 số", "tbTKNV");
 
     // Check name
-    check &= validation.checkEmpty(ten, "Bạn không có tên hả ?", "tbTen") && validation.checkName(ten, "Tên không hợp lệ", "tbTen");
+    check &= validation.checkEmpty(ten, "Hãy nhập tên !", "tbTen") && validation.checkName(ten, "Tên không hợp lệ", "tbTen");
     //Check email
-    check &= validation.checkEmpty(email, 'Điền email vào đi !', 'tbEmail') && validation.checkEmail(email, "Email không hợp lệ", "tbEmail");
+    check &= validation.checkEmpty(email, 'Hãy nhập email !', 'tbEmail') && validation.checkEmail(email, "Email không hợp lệ", "tbEmail");
     //Check password
-    check &= validation.checkEmpty(matKhau, "Không điền mật khẩu ren tạo được acc ?", "tbMatKhau") && validation.checkPass(matKhau, "Mật khẩu phải từ 6-10 ký tự, chứa ít nhất 1 ký tự số, 1 ký tự in hoa, 1 ký tự đặc biệt", "tbMatKhau");
+    check &= validation.checkEmpty(matKhau, "Hãy nhập mật khẩu ?", "tbMatKhau") && validation.checkPass(matKhau, "Mật khẩu phải từ 6-10 ký tự, chứa ít nhất 1 ký tự số, 1 ký tự in hoa, 1 ký tự đặc biệt", "tbMatKhau");
     //Check date
     check &= validation.checkEmpty(ngayLam, "Hãy nhập ngày làm !", "tbNgay") && validation.checkDate(ngayLam, "Hãy điền theo định dạng mm/dd/yyyy", "tbNgay");
     //Check tags select
     check &= validation.checkPosition(chucVu, "Hãy chọn chức vụ", "tbChucVu");
+    //Check wage
+    check &= validation.checkEmpty(luongCB, "Hãy nhập lương !", "tbLuongCB") && validation.checkWage(luongCB, "Số tiền không chính xác !", "tbLuongCB") && validation.checkInteger(luongCB, "Số tiền không chính xác !", "tbLuongCB");
+    //Check word time
+    check &= validation.checkEmpty(gioLam, "Hãy nhập giờ làm !", "tbGiolam") && validation.checkTime(gioLam, "Số giờ làm không chính xác !", "tbGiolam") && validation.checkInteger(gioLam, "Số giờ làm phải được làm tròn !", "tbGiolam");
 
 
 

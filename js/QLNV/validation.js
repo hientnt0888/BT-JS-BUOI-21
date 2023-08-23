@@ -63,6 +63,17 @@ function Validation() {
         document.getElementById(spanID).style.display = "block"
         return false;
     }
+    this.checkInteger = function (value, message, spanID) {
+        var regex = /^-?\d+$/;
+        if (value.match(regex)) {
+            document.getElementById(spanID).style.display = "none"
+            return true;
+        }
+        document.getElementById(spanID).innerHTML = message;
+        document.getElementById(spanID).style.display = "block"
+        return false;
+
+    }
     this.checkDate = function (value, message, spanID) {
         var regex = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$/;
         if (value.match(regex)) {
@@ -82,5 +93,24 @@ function Validation() {
         document.getElementById(spanID).style.display = "block"
         return false;
     }
+    this.checkWage = function (value, message, spanID) {
+        if (value <= 20000000 && value >= 1000000) {
+            document.getElementById(spanID).style.display = "none"
+            return true;
+        }
+        document.getElementById(spanID).innerHTML = message;
+        document.getElementById(spanID).style.display = "block"
+        return false;
+    }
+    this.checkTime = function (value, message, spanID) {
+        if (value <= 200 && value >= 80) {
+            document.getElementById(spanID).style.display = "none"
+            return true;
+        }
+        document.getElementById(spanID).innerHTML = message;
+        document.getElementById(spanID).style.display = "block"
+        return false;
+    }
+
 
 }
