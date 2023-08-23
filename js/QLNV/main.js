@@ -20,13 +20,15 @@ function themNhanVien() {
     //Check tai khoan
     check &= validation.checkEmpty(tk, 'Hãy nhập tài khoản !', 'tbTKNV')
         && validation.checkTK(tk, "Tài khoản không được trùng", "tbTKNV", dsnv.mangNV) && validation.checkNumber(tk, "Tài khoản phải là số từ 4 đến 6 số", "tbTKNV");
+    console.log("🚀 ~ file: main.js:42 ~ themNhanVien ~ check:", check)
+
 
     // Check name
     check &= validation.checkEmpty(ten, "Hãy nhập tên !", "tbTen") && validation.checkName(ten, "Tên không hợp lệ", "tbTen");
     //Check email
     check &= validation.checkEmpty(email, 'Hãy nhập email !', 'tbEmail') && validation.checkEmail(email, "Email không hợp lệ", "tbEmail");
     //Check password
-    check &= validation.checkEmpty(matKhau, "Hãy nhập mật khẩu ?", "tbMatKhau") && validation.checkPass(matKhau, "Mật khẩu phải từ 6-10 ký tự, chứa ít nhất 1 ký tự số, 1 ký tự in hoa, 1 ký tự đặc biệt", "tbMatKhau");
+    check &= validation.checkEmpty(matKhau, "Hãy nhập mật khẩu ?", "tbMatKhau") && validation.checkPass(matKhau, "Mật khẩu phải từ 6-10 ký tự, chứa ít nhất 1 ký tự số, 1 ký tự in hoa, 1 ký tự đặc biệt trong !@#$%^&*", "tbMatKhau");
     //Check date
     check &= validation.checkEmpty(ngayLam, "Hãy nhập ngày làm !", "tbNgay") && validation.checkDate(ngayLam, "Hãy điền theo định dạng mm/dd/yyyy", "tbNgay");
     //Check tags select
@@ -35,8 +37,6 @@ function themNhanVien() {
     check &= validation.checkEmpty(luongCB, "Hãy nhập lương !", "tbLuongCB") && validation.checkWage(luongCB, "Số tiền không chính xác !", "tbLuongCB") && validation.checkInteger(luongCB, "Số tiền không chính xác !", "tbLuongCB");
     //Check word time
     check &= validation.checkEmpty(gioLam, "Hãy nhập giờ làm !", "tbGiolam") && validation.checkTime(gioLam, "Số giờ làm không chính xác !", "tbGiolam") && validation.checkInteger(gioLam, "Số giờ làm phải được làm tròn !", "tbGiolam");
-
-
 
     if (check) {
         var nv = new NhanVien(tk, ten, email, matKhau, ngayLam, luongCB, chucVu, gioLam);
@@ -47,7 +47,6 @@ function themNhanVien() {
         setLocal();
 
     }
-
 }
 getEle("#btnThemNV").onclick = themNhanVien;
 
@@ -170,6 +169,6 @@ getEle("#btnThem").onclick = resetForm;
 // Tìm kiếm nhân viên theo xếp loại
 function timKiemNV() {
     var keyWord = getEle("#searchName").value;
-      hienThiDSNV(dsnv.findNV(keyWord));
+    hienThiDSNV(dsnv.findNV(keyWord));
 }
 getEle("#btnTimNV").onclick = timKiemNV;
