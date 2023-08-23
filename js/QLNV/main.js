@@ -4,8 +4,9 @@ function getEle(ele) {
 var dsnv = new DanhSachNV();
 var validation = new Validation();
 
-function themNhanVien() {
 
+//Thêm nhân viên
+function themNhanVien() {
     var tk = getEle("#tknv").value;
     var ten = getEle("#name").value;
     var email = getEle("#email").value;
@@ -53,7 +54,6 @@ getEle("#btnThemNV").onclick = themNhanVien;
 
 
 //Hiển thị DSNV 
-
 function hienThiDSNV(mangNV) {
 
     var content = ""
@@ -69,7 +69,7 @@ function hienThiDSNV(mangNV) {
         <td>${nv.loaiNV}</td>
         <td><button class="btn btn-danger" onclick="xoaNhanVien('${nv.taiKhoan}')
         ">Xoá</button></td>
-        <td><button class="btn btn-danger" data-toggle="modal" data-target="#myModal" onclick="xemNhanVien(${nv.taiKhoan})">Xem</button></td>
+        <td><button class="btn btn-danger" data-toggle="modal" data-target="#myModal" onclick="xemNhanVien('${nv.taiKhoan}')">Xem</button></td>
       
         </tr>`
         content += trELe;
@@ -79,9 +79,12 @@ function hienThiDSNV(mangNV) {
 
 }
 
+//Lưu mảng xuống local
 function setLocal() {
     localStorage.setItem("DSNV", JSON.stringify(dsnv.mangNV))
 }
+
+//Lấy mảng dưới local lên hiển thị
 function getLocal() {
     if (localStorage.getItem("DSNV") !== null) {
         dsnv.mangNV = JSON.parse(localStorage.getItem("DSNV"));
@@ -89,13 +92,15 @@ function getLocal() {
     }
 }
 getLocal();
+
+//Xem nhân viên
 function xemNhanVien(maNV) {
+    console.log("🚀 ~ file: main.js:98 ~ xemNhanVien ~ maNV:", maNV)
     var nv = dsnv.xemNV(maNV);
     getEle("#btnThemNV").disabled = true;
-
+    getEle("#tknv").disabled = true;
 
     getEle("#tknv").value = nv.taiKhoan;
-    getEle("#tknv").disabled = true;
     getEle("#name").value = nv.hoTen;
     getEle("#email").value = nv.email;
     getEle("#password").value = nv.matKhau;
@@ -105,14 +110,14 @@ function xemNhanVien(maNV) {
     getEle("#gioLam").value = nv.gioLam;
 }
 
+//Xóa sinh viên
 function xoaNhanVien(maXoa) {
     dsnv.xoaNV(maXoa);
     setLocal();
     getLocal();
 }
 
-
-
+//Cập nhật
 function capNhat() {
 
     var tk = getEle("#tknv").value;
@@ -124,9 +129,7 @@ function capNhat() {
     var chucVu = getEle("#chucvu").value;
     var gioLam = getEle("#gioLam").value;
 
-
     var check = true;
-
     // Check name
     check &= validation.checkEmpty(ten, "Hãy nhập tên !", "tbTen") && validation.checkName(ten, "Tên không hợp lệ", "tbTen");
     //Check email
@@ -142,22 +145,20 @@ function capNhat() {
     //Check word time
     check &= validation.checkEmpty(gioLam, "Hãy nhập giờ làm !", "tbGiolam") && validation.checkTime(gioLam, "Số giờ làm không chính xác !", "tbGiolam") && validation.checkInteger(gioLam, "Số giờ làm phải được làm tròn !", "tbGiolam");
 
-
-
     if (check) {
         var nvUpdate = new NhanVien(tk, ten, email, matKhau, ngayLam, luongCB, chucVu, gioLam);
         nvUpdate.tinhLuong();
         nvUpdate.xepLoai();
         dsnv.capNhat(tk, nvUpdate);
-
         hienThiDSNV(dsnv.mangNV);
         setLocal();
         getLocal()
-
     }
 }
 getEle("#btnCapNhat").onclick = capNhat;
 
+
+//Reset form
 function resetForm() {
     getEle("#btnThemNV").disabled = false;
     getEle("#formLogIn").reset();
