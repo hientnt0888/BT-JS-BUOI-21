@@ -24,4 +24,16 @@ function DanhSachNV() {
             this.mangNV[indexNV] = nvUpdate;
         }
     }
+    //Tìm kiếm nhân viên theo xếp loại
+    this.findNV = function (keyWord) {
+        var mangNVTK = [];
+        var removeSpace = keyWord.toLowerCase().replace(/\s/g, "");
+        this.mangNV.map(function (nv) {
+                    var index = nv.loaiNV.toLowerCase().replace(/\s/g, "").indexOf(removeSpace);
+            if (index > -1) {
+                mangNVTK.push(nv);
+            }
+        });
+        return mangNVTK;
+    }
 }
