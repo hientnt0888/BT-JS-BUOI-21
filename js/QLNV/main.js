@@ -94,7 +94,7 @@ getLocal();
 
 //Xem nhân viên
 function xemNhanVien(maNV) {
-    console.log("🚀 ~ file: main.js:98 ~ xemNhanVien ~ maNV:", maNV)
+
     var nv = dsnv.xemNV(maNV);
     getEle("#btnThemNV").disabled = true;
     getEle("#tknv").disabled = true;
@@ -107,6 +107,12 @@ function xemNhanVien(maNV) {
     getEle("#luongCB").value = nv.luongCB;
     getEle("#chucvu").value = nv.chucVu;
     getEle("#gioLam").value = nv.gioLam;
+
+    var spans = document.querySelectorAll(".sp-thongbao");
+    for(var i= 0; i< spans.length;i++){
+        spans[i].style.display = "none"
+    }
+
 }
 
 //Xóa sinh viên
@@ -162,6 +168,10 @@ function resetForm() {
     getEle("#btnThemNV").disabled = false;
     getEle("#formLogIn").reset();
     getEle("#tknv").disabled = false;
+    var spans = document.querySelectorAll(".sp-thongbao");
+    for(var i= 0; i< spans.length;i++){
+        spans[i].style.display = "none"
+    }
 
 }
 getEle("#btnThem").onclick = resetForm;
